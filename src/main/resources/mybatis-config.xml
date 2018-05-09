@@ -4,11 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-   <settings>
-   <!-- 		java属性名picturePath = 数据库列名PICTURE_PATH  -->
+  <!--  <settings>
+   		java属性名picturePath = 数据库列名PICTURE_PATH 
   <setting name="mapUnderscoreToCamelCase" value="true"/>
   
-   </settings>
+   </settings> -->
    
    <typeAliases>
       <package name="ShoppingMall.entity"/>

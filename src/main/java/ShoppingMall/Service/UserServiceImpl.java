@@ -17,29 +17,35 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user =  userDao.findOneByUsername(username);
-		if(user==null){
-			throw new UsernameNotFoundException("ÕÒ²»µ½¸ÃÓÃ»§µÄĞÅÏ¢");
+		User user = userDao.findOneByUsername(username);
+		if (user == null) {
+			throw new UsernameNotFoundException("æ‰¾ä¸åˆ°è¯¥ç”¨æˆ·çš„ä¿¡æ¯");
 		}
 		return new UserDetailsImpl(user);
 	}
 
 	public void create(User user) {
-           userDao.create(user);		
+		userDao.create(user);
+	}
+
+	@Override
+	public User findOneByUsername(String username) {
+		return userDao.findOneByUsername(username);
 	}
 
 }
-class UserDetailsImpl extends org.springframework.security.core.userdetails.User{
+
+class UserDetailsImpl extends org.springframework.security.core.userdetails.User {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private User user;
 
 	public UserDetailsImpl(User user) {
-		super(user.getUsername(),user.getPassword(),
-				Arrays.asList(new SimpleGrantedAuthority("ROLE_"+ user.getRole())));
+		super(user.getUsername(), user.getPassword(),
+				Arrays.asList(new SimpleGrantedAuthority("ROLE_" + user.getRole())));
 		this.user = user;
 	}
 

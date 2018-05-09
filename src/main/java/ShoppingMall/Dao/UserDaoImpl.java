@@ -17,6 +17,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public void create(User user) {
+		System.out.println(user.toString()+"dao");
              userMapper.create(user);		
 	}
 

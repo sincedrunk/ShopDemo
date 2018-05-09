@@ -1,68 +1,72 @@
 package ShoppingMall.entity;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 public class User {
 
-	private Integer id;
-	@Size(min = 2,max = 16 ,message="ÓÃ»§Ãû±ØĞëÊÇ2~16¸ö×Ö")
+	private Long id;
+//	@Size(min = 2, max = 16, message = "ç”¨æˆ·åå¿…é¡»æ˜¯2~16ä¸ªå­—")
 	private String username;
-	
-	@Size(min = 6 ,max = 64 ,message="ÃÜÂë³¤¶ÈÎª6~64")
-	private String password;
-	
-	@Pattern(regexp="^1[3|4|5|7|8][0-9]{9}$",message="ÊÖ»úºÅ²»·ûºÏ¹æÔò")
-	private Integer phone;
-	
-	private String role;
-	
-	@Email(regexp="^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z0-9]{2,6}$",message="ÓÊÏäºÅ²»·ûºÏ¹æÔò")
-	private String email;
 
-	public Integer getId() {
+//	@Size(min = 6, max = 64, message = "å¯†ç é•¿åº¦ä¸º6~64")
+	private String password;
+
+//	@Pattern(regexp = "^1[3|4|5|7|8][0-9]{9}$", message = "æ‰‹æœºå·ä¸ç¬¦åˆè§„åˆ™")
+	private String phonenum;
+
+//	@Email(regexp = "^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z0-9]{2,6}$", message = "é‚®ç®±å·ä¸ç¬¦åˆè§„åˆ™")
+	private String email;
+	private String role;
+
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Integer getPhone() {
-		return phone;
+
+	public String getPhonenum() {
+		return phonenum;
 	}
-	public void setPhone(Integer phone) {
-		this.phone = phone;
+
+	public void setPhonenum(String phonenum) {
+		this.phonenum = phonenum;
 	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", phone=" + phone + ", role="
-				+ role + ", email=" + email + "]";
+
+	public String getRole() {
+		return role;
 	}
 
-	
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", phonenum=" + phonenum
+				+ ", email=" + email + ", role=" + role + "]";
+	}
 }

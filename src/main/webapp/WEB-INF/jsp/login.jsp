@@ -17,7 +17,7 @@
 <body>
  <div class="hrader" id="header">
   <a href="login.jsp" style="color:#FD7306;margin-left:20px;">请登录</a> 
-  <a href="reg.jsp">注册</a>
+  <a href="register">注册</a>
   <div class="topNav">
    <a href="index.jsp" style="color:#FD7306;">首页</a>
    <a href="buy.jsp">买家</a>

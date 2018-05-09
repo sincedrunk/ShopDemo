@@ -10,7 +10,7 @@
 
 	<insert id="create">
 		insert into
-		s_user(username,email,phonenum,password)values
-		(#{username},#{email},${phone},${password})
+		s_user (username,email,phonenum,password) values
+		 (#{username},#{email},#{phonenum},#{password})
 	</insert>
 </mapper>

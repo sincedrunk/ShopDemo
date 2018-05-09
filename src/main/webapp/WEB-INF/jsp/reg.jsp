@@ -52,7 +52,7 @@
     </div><!--loginBuyList/-->
     <div class="loginBuyList">
      <label for="phone">手机号码：</label>
-     <input type="text" id="phone" name="phone"/>
+     <input type="text" id="phone" name="phonenum"/>
     </div><!--loginBuyList/-->
     <div class="loginBuyList">
      <label for="password">设置密码：</label>
@@ -86,7 +86,7 @@
     </div><!--loginBuyList/-->
     <div class="loginBuyList">
      <label for="email">邮箱：</label>
-     <input type="text" id="email" />
+     <input type="text" id="email" name ="email" />
     </div><!--loginBuyList/-->
     <div class="loginBuyList">
      <label for="tel">手机号码：</label>

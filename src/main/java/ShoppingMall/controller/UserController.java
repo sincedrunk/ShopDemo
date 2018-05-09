@@ -37,11 +37,14 @@ public class UserController {
 	public String register(@Valid @ModelAttribute User user, BindingResult bindingResult, String password1,
 			Model model) {
 		if (bindingResult.hasErrors()) {
+			System.out.println("error");
 			return "reg";
 		} else if (!user.getPassword().equals(password1)) {
+			System.out.println("不匹配");
 			model.addAttribute("error", "输入密码不一致，请重新输入");
 			return "reg";
 		} else {
+			System.out.println(user.toString());
 			userService.create(user);
 			return "redirect:/login";
 		}
