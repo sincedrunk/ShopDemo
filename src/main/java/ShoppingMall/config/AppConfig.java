@@ -13,8 +13,12 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -46,25 +50,37 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
-	public JdbcTemplate template(DataSource dataSource) {
+	public JdbcTemplate template(DataSource dataSource){
 		return new JdbcTemplate(dataSource);
 	}
-
+	//映射public
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/assets/**").addResourceLocations("/public/");
 	}
-
+	//配置mybatis
 	@Bean
-	public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource) {
+	public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource){
 		SqlSessionFactoryBean sf = new SqlSessionFactoryBean();
 		sf.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
 		sf.setDataSource(dataSource);
 		return sf;
-	}
-
+		}
+    
 	@Bean
-	public PlatformTransactionManager transactionManager(DataSource dataSource) {
-		return new DataSourceTransactionManager(dataSource);
+	public MultipartResolver multipartResolver(){//多部解析器
+		CommonsMultipartResolver mr = new CommonsMultipartResolver();
+		mr.setMaxUploadSize(10*1024*1024);
+		return mr;
 	}
+	
+	//事务
+     @Bean
+     public PlatformTransactionManager transactionManager(DataSource dataSource){
+		return new DataSourceTransactionManager(dataSource);
+     }
+     @Bean
+     public PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
+     }
 }

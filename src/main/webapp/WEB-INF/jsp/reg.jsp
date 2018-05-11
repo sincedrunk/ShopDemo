@@ -44,7 +44,7 @@
 					<div class="clears"></div>
 				</ul>
 				<!--regEq/-->
-				<form action="${contextPath}/register" method="post" class="regForm">
+				<form action="${contextPath}/reg" method="post" class="regForm">
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="loginBuyList">
@@ -58,7 +58,7 @@
 					</div>
 					<!--loginBuyList/-->
 					<div class="loginBuyList">
-						<label for="phone">手机号码：</label> <input type="text" id="phone"
+						<label for="phonenum">手机号码：</label> <input type="text" id="phonenum"
 							name="phonenum" />
 					</div>
 					<!--loginBuyList/-->

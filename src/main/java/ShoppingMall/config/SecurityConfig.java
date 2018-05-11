@@ -20,8 +20,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
           http.authorizeRequests()
           .antMatchers("/admin/**").access(" isFullyAuthenticated() and FuhasRloe('ADMIN')")
           .antMatchers("/assets/**","/login").permitAll()
-          .antMatchers("/register/**").permitAll()
+          .antMatchers("/reg/**").permitAll()
           .antMatchers("/**").authenticated()
+          
           
           .and()
           .formLogin()
