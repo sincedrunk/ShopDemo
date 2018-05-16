@@ -7,4 +7,6 @@ public interface UserService {
 
 	void create(User user);
 
+	void updateEmail(User curUser);
+
 }

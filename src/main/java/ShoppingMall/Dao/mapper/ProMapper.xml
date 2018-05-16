@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ShoppingMall.Dao.mapper.ProMapper">
+	<insert id="createPro">
+		insert into
+		pro(name,print_url,price,describe,sort_id)
+		values(#{name},#{print_url},#{price},#{describe},#{sort_id})
+	</insert>
+
+	<select id="findAll" resultMap="proDetailsMap">
+		select p.id pro_id,p.name
+		pro_name,p.print_url pro_print_url,
+		p.price pro_price,p.describe
+		p_describe,s.id sort_id,s.name sort_name
+		from pro p inner join pro_sort
+		s on p.sort_id = s.id
+	</select>
+
+	<select id="findIdOnePro" resultMap="proDetailsMap">
+		select p.id pro_id,p.name
+		pro_name,p.print_url pro_print_url,
+		p.price pro_price,p.describe
+		p_describe,s.id sort_id,s.name sort_name
+		from pro p inner join pro_sort
+		s on p.sort_id = s.id
+		where p.id = #{id}
+	</select>
+
+	<resultMap type="ShoppingMall.entity.Pro" id="proDetailsMap">
+		<id property="id" column="pro_id" />
+		<result property="name" column="pro_name" />
+		<result property="printUrl" column="pro_print_url" />
+		<result property="price" column="pro_price" />
+		<result property="describe" column="p_describe" />
+		<association property="sort" javaType="ShoppingMall.entity.Sort">
+			<id property="id" column="sort_id" />
+			<result property="name" column="sort_name" />
+		</association>
+	</resultMap>
+</mapper>

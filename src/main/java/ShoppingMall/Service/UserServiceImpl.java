@@ -35,6 +35,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return userDao.findOneByUsername(username);
 	}
 
+	@Override
+	public void updateEmail(User curUser) {
+		userDao.updateEmail(curUser);
+
+	}
+
 }
 
 class UserDetailsImpl extends org.springframework.security.core.userdetails.User {

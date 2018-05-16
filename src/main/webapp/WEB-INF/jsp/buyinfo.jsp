@@ -19,7 +19,7 @@
 			<a href="${contextPath}/login" style="color: #C94E13;">请登录</a> <a
 				href="${contextPath}/reg">注册</a>
 			<ul class="topNav">
-				<li><a href="${contextPath}/order">我的订单 </a></li>
+				<li><a href="${contextPath}/Viporder">我的订单 </a></li>
 				<li class="gouwuche"><a href="${contextPath}/car">购物车</a> <strong
 					style="color: #C94E13;">3</strong></li>
 				<li class="shoucangjia"><a href="${contextPath}/shoucang">收藏夹</a></li>

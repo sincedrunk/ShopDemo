@@ -1,8 +1,12 @@
 package ShoppingMall.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,19 +15,25 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import ShoppingMall.Service.PersonalCenterService;
 import ShoppingMall.Service.UserService;
+import ShoppingMall.entity.PersonalCenter;
 import ShoppingMall.entity.User;
 
 @Controller
 public class UserController {
+	private final String filePath = "F:/upload";
 
 	private UserService userService;
 	private PasswordEncoder passwordEncoder;
+	private PersonalCenterService personalCenterService;
 
 	@Autowired
-	public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+	public UserController(UserService userService, PasswordEncoder passwordEncoder,
+			PersonalCenterService personalCenterService) {
 		this.userService = userService;
 		this.passwordEncoder = passwordEncoder;
+		this.personalCenterService = personalCenterService;
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/reg")
@@ -66,24 +76,42 @@ public class UserController {
 		return "car";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/prolist")
-	public String prolist() {
-		return "prolist";
-	}
-
 	@RequestMapping(method = RequestMethod.GET, value = "/order")
 	public String order() {
 		return "order";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/success")
-	public String success() {
+	public String success(@AuthenticationPrincipal(expression = "user") User curuser, Model model) {
 		return "success";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/vip")
-	public String vip() {
+	public String vip(@AuthenticationPrincipal(expression = "user") User curUser, Model model) {
+		PersonalCenter personalCenter = personalCenterService.findOneConterDetails(curUser.getId());
+		model.addAttribute("personalCenter", personalCenter);
 		return "vip";
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "vip-update")
+	public String vipUpdate(@AuthenticationPrincipal(expression = "user") User curUser,
+			@ModelAttribute PersonalCenter personalCenter, String email) {
+		if (personalCenter.getPortrait().getSize() != 0) {
+
+			try {
+				String fileName = System.currentTimeMillis() + personalCenter.getPortrait().getOriginalFilename();
+				personalCenter.getPortrait().transferTo(new File(filePath, fileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (personalCenter.getId() == null)
+			personalCenterService.createPersonalCenter(personalCenter);
+		else
+			personalCenterService.updatePersonalCenter(personalCenter);
+		curUser.setEmail(email);
+		userService.updateEmail(curUser);
+		return "redirect:/vip";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/vipOrder")

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ShoppingMall.Dao.mapper.PersonalCenterMapper">
+	<insert id="createPersonalCenter">
+		INSERT into
+		s_personal_centre(username,portrait_url,city,sex,indentity_id,type,resume)
+		VALUES(#{username},#{portrait_url},#{city},#{sex},#{indentity_id},#{type},#{resume})
+	</insert>
+	<select id="findOneConterDetails" resultType="ShoppingMall.entity.PersonalCenter">
+		select
+		username,portrait_url,city,sex,indentity_id,type,resume from
+		s_personal_centre
+		where id =#{id}
+	</select>
+	<select id="updatePersonalCenter"></select>
+</mapper>

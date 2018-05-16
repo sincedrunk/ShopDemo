@@ -11,14 +11,20 @@ public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private UserMapper userMapper;
-	
+
 	public User findOneByUsername(String username) {
 		return userMapper.findOneByUsername(username);
 	}
 
 	public void create(User user) {
-		System.out.println(user.toString()+"dao");
-             userMapper.create(user);		
+		System.out.println(user.toString() + "dao");
+		userMapper.create(user);
+	}
+
+	@Override
+	public void updateEmail(User curUser) {
+		userMapper.updateEamil(curUser);
+
 	}
 
 }
